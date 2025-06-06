@@ -1,1 +1,136 @@
-hello
+# 🧠 MLOps Tabular Pipeline
+
+An end-to-end MLOps pipeline for tabular data using the Titanic / UCI Adult / Credit Card Fraud datasets. This project demonstrates best practices in model development, version control, tracking, serving, and CI/CD automation.
+
+---
+
+## 🚀 Features
+
+| Component                | Tool/Technology              |
+|--------------------------|------------------------------|
+| Data & Model Versioning  | DVC                          |
+| Experiment Tracking      | MLflow + Weights & Biases    |
+| Model Training & Serving | scikit-learn + FastAPI       |
+| CI/CD Automation         | GitHub Actions               |
+| Containerization         | Docker + Docker Compose      |
+| Testing                  | Pytest                       |
+
+---
+
+## 🗂️ Project Structure
+
+mlops-tabular-pipeline/
+├── data/ # Raw & processed data
+├── model/ # Trained model (.pkl)
+├── src/ # Preprocessing, training, evaluation code
+├── serving/ # FastAPI app for model inference
+├── tests/ # Unit tests
+├── .github/workflows/ # GitHub Actions CI/CD
+├── dvc.yaml # DVC pipeline definition
+├── params.yaml # Model hyperparameters
+├── Dockerfile # API container definition
+├── docker-compose.yaml # Compose for API + MLflow
+├── requirements.txt # Python dependencies
+├── README.md # Project documentation
+
+
+---
+---
+
+## ⚙️ Setup Instructions
+
+### 🧩 Prerequisites
+
+- Python 3.8+
+- Docker & Docker Compose
+- DVC (`pip install dvc`)
+- GitHub account
+- (Optional) W&B Account (`pip install wandb`)
+
+---
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/your-username/mlops-tabular-pipeline.git
+cd mlops-tabular-pipeline
+2️⃣ Install Dependencies
+bash
+Copy code
+pip install -r requirements.txt
+3️⃣ Initialize DVC & Pull Data
+bash
+Copy code
+dvc init
+dvc pull
+If data is not yet pushed to remote, you can skip this or manually add data to data/raw/.
+
+4️⃣ Run Training Pipeline
+bash
+Copy code
+python src/train.py
+5️⃣ Evaluate the Model
+bash
+Copy code
+python src/evaluate.py
+6️⃣ Serve the Model with FastAPI
+bash
+Copy code
+uvicorn serving.main:app --host 0.0.0.0 --port 8000
+Or using Docker Compose:
+
+bash
+Copy code
+docker-compose up
+FastAPI: http://localhost:8000
+
+MLflow: http://localhost:5000
+
+🧪 Run Unit Tests
+bash
+Copy code
+pytest tests/
+🔁 CI/CD with GitHub Actions
+Every push to the main branch triggers the following via .github/workflows/ci-cd.yaml:
+
+Install dependencies
+
+Run tests
+
+Pull data with DVC
+
+Run training pipeline
+
+🧠 Weights & Biases Integration
+To enable W&B tracking:
+
+bash
+Copy code
+wandb login
+In src/train.py, add:
+
+python
+Copy code
+import wandb
+wandb.init(project="mlops-tabular-pipeline")
+📦 Docker Compose
+To spin up FastAPI + MLflow UI:
+
+bash
+Copy code
+docker-compose up
+FastAPI: http://localhost:8000
+
+MLflow UI: http://localhost:5000
+
+✅ TODO (Next Enhancements)
+Add full training/eval/predict logic
+
+Terraform deployment to cloud
+
+Gradio/Streamlit UI frontend
+
+Automatic retraining on new data
+
+🤝 Contributing
+Pull requests are welcome. For major changes, open an issue first.
